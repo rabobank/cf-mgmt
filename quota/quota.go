@@ -190,6 +190,10 @@ func (m *Manager) createSpaceQuota(input config.SpaceQuota, space *resource.Spac
 			}
 		}
 	} else {
+		quota.Relationships = &resource.SpaceQuotaRelationships{
+			Organization: space.Relationships.Organization,
+			Spaces:       &resource.ToManyRelationships{Data: []resource.Relationship{{GUID: space.GUID}}},
+		}
 		createdQuota, err := m.CreateSpaceQuota(quota)
 		if err != nil {
 			return err
