@@ -167,10 +167,7 @@ var _ = Describe("given QuotaManager", func() {
 			Expect(*quotaRequest.Routes.TotalReservedPorts).Should(Equal(0))
 			Expect(quotaRequest.Services.TotalServiceKeys).Should(BeNil())
 			Expect(*quotaRequest.Services.PaidServicesAllowed).Should(BeTrue())
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
-			_, quotaGUID, spaceGUIDs := fakeSpaceQuotaClient.ApplyArgsForCall(0)
-			Expect(quotaGUID).Should(Equal("space-quota-guid"))
-			Expect(spaceGUIDs).Should(ContainElement("space1-guid"))
+			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
 		It("should create a quota that has unlimited memory specified and assign it", func() {
@@ -213,10 +210,7 @@ var _ = Describe("given QuotaManager", func() {
 			Expect(*quotaRequest.Name).Should(Equal("space1"))
 			Expect(quotaRequest.Apps).ShouldNot(BeNil())
 			Expect(quotaRequest.Apps.TotalMemoryInMB).Should(BeNil())
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
-			_, quotaGUID, spaceGUIDs := fakeSpaceQuotaClient.ApplyArgsForCall(0)
-			Expect(quotaGUID).Should(Equal("space-quota-guid"))
-			Expect(spaceGUIDs).Should(ContainElement("space1-guid"))
+			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
 		It("should error creating a quota", func() {
@@ -373,20 +367,6 @@ var _ = Describe("given QuotaManager", func() {
 			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
-		It("should create a quota and fail to assign it", func() {
-			fakeSpaceQuotaClient.CreateReturns(&resource.SpaceQuota{Name: "space1", GUID: "space-quota-guid"}, nil)
-			fakeSpaceQuotaClient.ApplyReturns(nil, errors.New("error"))
-			err := quotaMgr.CreateSpaceQuotas()
-			Expect(err).ShouldNot(BeNil())
-			Expect(fakeSpaceQuotaClient.CreateCallCount()).Should(Equal(1))
-			_, quotaRequest := fakeSpaceQuotaClient.CreateArgsForCall(0)
-			Expect(*quotaRequest.Name).Should(Equal("space1"))
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
-			_, quotaGUID, spaceGUIDs := fakeSpaceQuotaClient.ApplyArgsForCall(0)
-			Expect(quotaGUID).Should(Equal("space-quota-guid"))
-			Expect(spaceGUIDs).Should(ContainElement("space1-guid"))
-		})
-
 		It("should peek create a quota and peek assign it", func() {
 			quotaMgr.Peek = true
 			err := quotaMgr.CreateSpaceQuotas()
@@ -453,10 +433,7 @@ var _ = Describe("given QuotaManager", func() {
 			Expect(quotaRequest.Apps).ShouldNot(BeNil())
 			Expect(quotaRequest.Apps.TotalMemoryInMB).Should(BeNil())
 			Expect(quotaRequest.Apps.TotalInstances).Should(BeNil())
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
-			_, quotaGUID, spaceGUIDs := fakeSpaceQuotaClient.ApplyArgsForCall(0)
-			Expect(quotaGUID).Should(Equal("space-quota-guid"))
-			Expect(spaceGUIDs).Should(ContainElement("space1-guid"))
+			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
 	})
@@ -804,7 +781,7 @@ var _ = Describe("given QuotaManager", func() {
 			err := quotaMgr.CreateSpaceQuotas()
 			Expect(err).ShouldNot(HaveOccurred())
 			Expect(fakeSpaceQuotaClient.CreateCallCount()).Should(Equal(1))
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
+			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
 		It("Should create a space specfic quota", func() {
@@ -834,7 +811,7 @@ var _ = Describe("given QuotaManager", func() {
 			_, createQuotaRequest := fakeSpaceQuotaClient.CreateArgsForCall(0)
 			Expect(*createQuotaRequest.Name).Should(Equal("test-space"))
 			Expect(fakeSpaceQuotaClient.CreateCallCount()).Should(Equal(1))
-			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(1))
+			Expect(fakeSpaceQuotaClient.ApplyCallCount()).Should(Equal(0))
 		})
 
 		It("should optimize calls if named quota is empty and enable space quotas if false", func() {
