@@ -94,7 +94,7 @@ func (m *Manager) CreateSpaceQuotas() error {
 			}
 			spaceQuota := quotas[input.NamedQuota]
 
-			if spaceQuota != nil && (space.Relationships.Quota == nil || space.Relationships.Quota.Data.GUID != spaceQuota.GUID) {
+			if spaceQuota != nil && (space.Relationships.Quota == nil || space.Relationships.Quota.Data == nil || space.Relationships.Quota.Data.GUID != spaceQuota.GUID) {
 				if err = m.AssignQuotaToSpace(space, spaceQuota); err != nil {
 					return err
 				}
