@@ -24,7 +24,7 @@ func (m *DefaultManager) SyncAzureADUsers(roleUsers *role.RoleUsers, usersInput 
 			userID := userToUse.Upn
 			uaaUser := m.UAAUsers.GetByNameAndOrigin(userID, origin)
 			lo.G.Debugf("SyncAzureADUsers: Processing user: %s", userID)
-			if uaaUser == nil {
+			if uaaUser == nil && userToUse.Upn != "" {
 				lo.G.Debugf("AAD User %s doesn't exist in cloud foundry, so creating user", userToUse.Upn)
 				if userGUID, err := m.UAAMgr.CreateExternalUser(userToUse.Upn, userToUse.Upn, userToUse.Upn, m.AzureADConfig.UserOrigin); err != nil {
 					lo.G.Errorf("Unable to create AAD user %s with error %s", userToUse.Upn, err.Error())
