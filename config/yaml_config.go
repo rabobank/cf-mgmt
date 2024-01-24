@@ -86,7 +86,7 @@ func (m *yamlManager) GetASGConfigs() ([]ASGConfig, error) {
 // GetIsolationSegmentConfig reads isolation segment config
 func (m *yamlManager) GetGlobalConfig() (*GlobalConfig, error) {
 	globalConfig := &GlobalConfig{}
-	LoadFile(path.Join(m.ConfigDir, "cf-mgmt.yml"), globalConfig)
+	_ = LoadFile(path.Join(m.ConfigDir, "cf-mgmt.yml"), globalConfig)
 	if len(globalConfig.MetadataPrefix) == 0 {
 		globalConfig.MetadataPrefix = "cf-mgmt.pivotal.io"
 	}
@@ -153,7 +153,7 @@ func (m *yamlManager) OrgSpaces(orgName string) (*Spaces, error) {
 func (m *yamlManager) GetSpaceConfigs() ([]SpaceConfig, error) {
 
 	spaceDefaults := SpaceConfig{}
-	LoadFile(filepath.Join(m.ConfigDir, "spaceDefaults.yml"), &spaceDefaults)
+	_ = LoadFile(filepath.Join(m.ConfigDir, "spaceDefaults.yml"), &spaceDefaults)
 
 	files, err := FindFiles(m.ConfigDir, "spaceConfig.yml")
 	if err != nil {
@@ -325,7 +325,7 @@ func (m *yamlManager) DeleteOrgConfig(orgName string) error {
 		if err := m.SaveOrgs(orgs); err != nil {
 			return err
 		}
-		os.RemoveAll(path.Join(m.ConfigDir, orgName))
+		_ = os.RemoveAll(path.Join(m.ConfigDir, orgName))
 	}
 	return nil
 }
@@ -346,7 +346,7 @@ func (m *yamlManager) DeleteSpaceConfig(orgName, spaceName string) error {
 		if err := m.SaveOrgSpaces(spaces); err != nil {
 			return err
 		}
-		os.RemoveAll(path.Join(m.ConfigDir, orgName, spaceName))
+		_ = os.RemoveAll(path.Join(m.ConfigDir, orgName, spaceName))
 	}
 	return nil
 }
@@ -545,7 +545,7 @@ func (m *yamlManager) LdapConfig(ldapBindUser, ldapBindPassword, ldapServer stri
 	if ldapBindPassword != "" {
 		config.BindPassword = ldapBindPassword
 	} else {
-		lo.G.Warning("Ldap bind password should be removed from ldap.yml as this will be deprecated in a future release.  Use --ldap-password flag instead.")
+		lo.G.Debug("Ldap bind password should be removed from ldap.yml as this will be deprecated in a future release.  Use --ldap-password flag instead.")
 	}
 
 	if ldapServer != "" {
