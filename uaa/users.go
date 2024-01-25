@@ -41,14 +41,18 @@ func (u *Users) Exists(userName string) bool {
 
 func (u *Users) GetByNameAndOrigin(userName, origin string) *User {
 	if u.userMap == nil {
+		lo.G.Debugf("GetByNameAndOrigin: No users found in UAA, returning NIL")
 		return nil
 	}
 	userList := u.userMap[strings.ToLower(userName)]
 	for _, user := range userList {
+		lo.G.Debugf("GetByNameAndOrigin: Checking user's origin [%s] for user [%s] against origin [%s]", user.Origin, user.Username, origin)
 		if strings.EqualFold(user.Origin, origin) {
+			lo.G.Debugf("GetByNameAndOrigin: Found user [%s] with origin [%s]", user.Username, origin)
 			return &user
 		}
 	}
+	lo.G.Debugf("GetByNameAndOrigin: No user found for [%s] with origin [%s], returning NIL", userName, origin)
 	return nil
 }
 
