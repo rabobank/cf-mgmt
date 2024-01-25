@@ -57,14 +57,11 @@ func (u *Users) GetByNameAndOrigin(userName, origin string) *User {
 }
 
 func (u *Users) GetByID(ID string) *User {
-	lo.G.Debugf("GetByID: BEGIN: Looking for user with GUID [%s]", ID)
 	for _, user := range u.List() {
-		lo.G.Debugf("GetByID: Checking user's GUID [%s] for user [%s] against GUID [%s]", user.GUID, user.Username, ID)
 		if strings.EqualFold(user.GUID, ID) {
 			return &user
 		}
 	}
-	lo.G.Debug("GetByID: END: Returning NIL")
 	return nil
 }
 
