@@ -87,7 +87,7 @@ func (m *DefaultUAAManager) CreateExternalUser(userName, userEmail, externalID, 
 func (m *DefaultUAAManager) ListUsers() (*Users, error) {
 	users := &Users{}
 	lo.G.Debug("Getting users from Cloud Foundry")
-	userList, err := m.Client.ListAllUsers("", "", "userName,id,externalId,emails,origin", "")
+	userList, err := m.Client.ListAllUsers("", "userName", "userName,id,externalId,emails,origin", "")
 	if err != nil {
 		return nil, err
 	}
