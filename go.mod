@@ -5,7 +5,7 @@ go 1.20
 require (
 	code.cloudfoundry.org/routing-api v0.0.0-20240812231547-9f253a3ef041
 	github.com/cloudfoundry-community/go-cfclient v0.0.0-20220930021109-9c4e6c59ccf1
-	github.com/cloudfoundry-community/go-cfclient/v3 v3.0.0-alpha.9
+	github.com/cloudfoundry-community/go-cfclient/v3 v3.0.0-alpha.6
 	github.com/cloudfoundry-community/go-uaa v0.3.3
 	github.com/go-ldap/ldap/v3 v3.4.8
 	github.com/jessevdk/go-flags v1.6.1
@@ -47,6 +47,7 @@ require (
 	github.com/tedsuo/rata v1.0.1-0.20170830210128-07d200713958 // indirect
 	github.com/vito/go-sse v1.1.1 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
+	golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa // indirect
 	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
