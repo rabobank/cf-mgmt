@@ -39,7 +39,7 @@ jobs:
           COMMIT: ${{ github.sha }}
         run: rabo-ci/build.sh
       - name: upload cf-mgmt
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
