@@ -1,7 +1,6 @@
 package ldap
 
 import (
-	"errors"
 	"fmt"
 
 	ber "github.com/go-asn1-ber/asn1-ber"
@@ -242,8 +241,8 @@ func IsErrorAnyOf(err error, codes ...uint16) bool {
 		return false
 	}
 
-	var serverError *Error
-	if !errors.As(err, &serverError) {
+	serverError, ok := err.(*Error)
+	if !ok {
 		return false
 	}
 

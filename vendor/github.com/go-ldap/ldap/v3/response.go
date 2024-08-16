@@ -98,12 +98,13 @@ func (r *searchResponse) start(ctx context.Context, searchRequest *SearchRequest
 
 		foundSearchSingleResultDone := false
 		for !foundSearchSingleResultDone {
-			r.conn.Debug.Printf("%d: waiting for response", msgCtx.id)
 			select {
 			case <-ctx.Done():
 				r.conn.Debug.Printf("%d: %s", msgCtx.id, ctx.Err().Error())
 				return
-			case packetResponse, ok := <-msgCtx.responses:
+			default:
+				r.conn.Debug.Printf("%d: waiting for response", msgCtx.id)
+				packetResponse, ok := <-msgCtx.responses
 				if !ok {
 					err := NewError(ErrorNetwork, errors.New("ldap: response channel closed"))
 					r.ch <- &SearchSingleResult{Error: err}

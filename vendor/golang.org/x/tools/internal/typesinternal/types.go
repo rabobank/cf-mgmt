@@ -11,6 +11,8 @@ import (
 	"go/types"
 	"reflect"
 	"unsafe"
+
+	"golang.org/x/tools/go/types/objectpath"
 )
 
 func SetUsesCgo(conf *types.Config) bool {
@@ -49,17 +51,18 @@ func ReadGo116ErrorData(err types.Error) (code ErrorCode, start, end token.Pos, 
 	return ErrorCode(data[0]), token.Pos(data[1]), token.Pos(data[2]), true
 }
 
-// NameRelativeTo returns a types.Qualifier that qualifies members of
-// all packages other than pkg, using only the package name.
-// (By contrast, [types.RelativeTo] uses the complete package path,
-// which is often excessive.)
+var SetGoVersion = func(conf *types.Config, version string) bool { return false }
+
+// SkipEncoderMethodSorting marks the encoder as not requiring sorted methods,
+// as an optimization for gopls (which guarantees the order of parsed source files).
 //
-// If pkg is nil, it is equivalent to [*types.Package.Name].
-func NameRelativeTo(pkg *types.Package) types.Qualifier {
-	return func(other *types.Package) string {
-		if pkg != nil && pkg == other {
-			return "" // same package; unqualified
-		}
-		return other.Name()
-	}
-}
+// TODO(golang/go#61443): eliminate this parameter one way or the other.
+//
+//go:linkname SkipEncoderMethodSorting golang.org/x/tools/go/types/objectpath.skipMethodSorting
+func SkipEncoderMethodSorting(enc *objectpath.Encoder)
+
+// ObjectpathObject is like objectpath.Object, but allows suppressing method
+// sorting (which is not necessary for gopls).
+//
+//go:linkname ObjectpathObject golang.org/x/tools/go/types/objectpath.object
+func ObjectpathObject(pkg *types.Package, p objectpath.Path, skipMethodSorting bool) (types.Object, error)

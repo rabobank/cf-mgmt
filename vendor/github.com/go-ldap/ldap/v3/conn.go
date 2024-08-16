@@ -143,8 +143,7 @@ func DialWithTLSConfig(tc *tls.Config) DialOpt {
 
 // DialWithTLSDialer is a wrapper for DialWithTLSConfig with the option to
 // specify a net.Dialer to for example define a timeout or a custom resolver.
-//
-// Deprecated:  Use DialWithDialer and DialWithTLSConfig instead
+// @deprecated Use DialWithDialer and DialWithTLSConfig instead
 func DialWithTLSDialer(tlsConfig *tls.Config, dialer *net.Dialer) DialOpt {
 	return func(dc *DialContext) {
 		dc.tlsConfig = tlsConfig
@@ -196,8 +195,7 @@ func (dc *DialContext) dial(u *url.URL) (net.Conn, error) {
 
 // Dial connects to the given address on the given network using net.Dial
 // and then returns a new Conn for the connection.
-//
-// Deprecated:  Use DialURL instead.
+// @deprecated Use DialURL instead.
 func Dial(network, addr string) (*Conn, error) {
 	c, err := net.DialTimeout(network, addr, DefaultTimeout)
 	if err != nil {
@@ -210,8 +208,7 @@ func Dial(network, addr string) (*Conn, error) {
 
 // DialTLS connects to the given address on the given network using tls.Dial
 // and then returns a new Conn for the connection.
-//
-// Deprecated:  Use DialURL instead.
+// @deprecated Use DialURL instead.
 func DialTLS(network, addr string, config *tls.Config) (*Conn, error) {
 	c, err := tls.DialWithDialer(&net.Dialer{Timeout: DefaultTimeout}, network, addr, config)
 	if err != nil {
@@ -265,11 +262,7 @@ func NewConn(conn net.Conn, isTLS bool) *Conn {
 	return l
 }
 
-// Start initialises goroutines to read replies and process messages.
-// Warning: Calling this function in addition to Dial or DialURL
-// may cause race conditions.
-//
-// See: https://github.com/go-ldap/ldap/issues/356
+// Start initializes goroutines to read responses and process messages
 func (l *Conn) Start() {
 	go l.reader()
 	go l.processMessages()
