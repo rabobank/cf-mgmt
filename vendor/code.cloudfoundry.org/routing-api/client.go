@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -14,7 +14,7 @@ import (
 
 	"code.cloudfoundry.org/cfhttp/v2"
 	"code.cloudfoundry.org/routing-api/models"
-	trace "code.cloudfoundry.org/trace-logger"
+	"code.cloudfoundry.org/routing-api/trace"
 	"github.com/tedsuo/rata"
 	"github.com/vito/go-sse/sse"
 )
@@ -360,7 +360,7 @@ func (c *client) do(req *http.Request, response interface{}) error {
 
 func transformResponseError(res *http.Response) error {
 	errResponse := Error{}
-	data, err := ioutil.ReadAll(res.Body)
+	data, err := io.ReadAll(res.Body)
 	if err != nil {
 		return NewError(ResponseError, "failed to read response body")
 	}
