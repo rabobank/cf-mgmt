@@ -1,11 +1,13 @@
 # code.cloudfoundry.org/cfhttp/v2 v2.2.0
 ## explicit; go 1.19
 code.cloudfoundry.org/cfhttp/v2
-# code.cloudfoundry.org/routing-api v0.0.0-20240812231547-9f253a3ef041
+# code.cloudfoundry.org/routing-api v0.0.0-20210519201915-b3b118a368e6
 ## explicit
 code.cloudfoundry.org/routing-api
 code.cloudfoundry.org/routing-api/models
-code.cloudfoundry.org/routing-api/trace
+# code.cloudfoundry.org/trace-logger v0.0.0-20170119230301-107ef08a939d
+## explicit
+code.cloudfoundry.org/trace-logger
 # github.com/Azure/go-ntlmssp v0.0.0-20221128193559-754e69321358
 ## explicit
 github.com/Azure/go-ntlmssp
@@ -15,7 +17,7 @@ github.com/Masterminds/semver
 # github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f
 ## explicit
 github.com/bmizerany/pat
-# github.com/cloudfoundry-community/go-cfclient v0.0.0-20220930021109-9c4e6c59ccf1
+# github.com/cloudfoundry-community/go-cfclient v0.0.0-20220803221820-5e81c204bd31
 ## explicit; go 1.15
 github.com/cloudfoundry-community/go-cfclient
 # github.com/cloudfoundry-community/go-cfclient/v3 v3.0.0-alpha.6
@@ -162,7 +164,7 @@ golang.org/x/exp/slices
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.28.0
+# golang.org/x/net v0.28.0 => golang.org/x/net v0.28.0
 ## explicit; go 1.18
 golang.org/x/net/context
 golang.org/x/net/html
@@ -176,11 +178,11 @@ golang.org/x/oauth2/internal
 # golang.org/x/sync v0.8.0
 ## explicit; go 1.18
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.24.0
+# golang.org/x/sys v0.24.0 => golang.org/x/sys v0.24.0
 ## explicit; go 1.18
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/text v0.17.0
+# golang.org/x/text v0.17.0 => golang.org/x/text v0.17.0
 ## explicit; go 1.18
 golang.org/x/text/cases
 golang.org/x/text/encoding
@@ -235,3 +237,6 @@ gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3
+# golang.org/x/net => golang.org/x/net v0.28.0
+# golang.org/x/sys => golang.org/x/sys v0.24.0
+# golang.org/x/text => golang.org/x/text v0.17.0
