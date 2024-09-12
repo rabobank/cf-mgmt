@@ -1,6 +1,7 @@
 module github.com/vmwarepivotallabs/cf-mgmt
 
 go 1.22
+toolchain go1.22.5
 
 replace (
 	golang.org/x/net => golang.org/x/net v0.28.0
@@ -16,7 +17,7 @@ require (
 	github.com/cloudfoundry-community/go-uaa v0.3.3
 	github.com/go-ldap/ldap/v3 v3.4.8
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/maxbrunsfeld/counterfeiter/v6 v6.8.1
+	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.34.1
 	github.com/pkg/errors v0.9.1
@@ -50,13 +51,13 @@ require (
 	github.com/vito/go-sse v1.1.1 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
 	golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa // indirect
-	golang.org/x/mod v0.20.0 // indirect
-	golang.org/x/net v0.28.0 // indirect
+	golang.org/x/mod v0.21.0 // indirect
+	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.24.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
+	golang.org/x/tools v0.25.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
