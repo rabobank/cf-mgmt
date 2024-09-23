@@ -1,7 +1,7 @@
-# code.cloudfoundry.org/cfhttp/v2 v2.2.0
-## explicit; go 1.19
+# code.cloudfoundry.org/cfhttp/v2 v2.12.0
+## explicit; go 1.22.0
 code.cloudfoundry.org/cfhttp/v2
-# code.cloudfoundry.org/routing-api v0.0.0-20240812231547-9f253a3ef041
+# code.cloudfoundry.org/routing-api v0.0.0-20240906112649-2aa4a71d284e
 ## explicit
 code.cloudfoundry.org/routing-api
 code.cloudfoundry.org/routing-api/models
@@ -69,8 +69,8 @@ github.com/jessevdk/go-flags
 # github.com/martini-contrib/render v0.0.0-20150707142108-ec18f8345a11
 ## explicit
 github.com/martini-contrib/render
-# github.com/maxbrunsfeld/counterfeiter/v6 v6.8.1
-## explicit; go 1.20
+# github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
+## explicit; go 1.22.0
 github.com/maxbrunsfeld/counterfeiter/v6
 github.com/maxbrunsfeld/counterfeiter/v6/arguments
 github.com/maxbrunsfeld/counterfeiter/v6/command
@@ -107,8 +107,8 @@ github.com/onsi/ginkgo/reporters/stenographer
 github.com/onsi/ginkgo/reporters/stenographer/support/go-colorable
 github.com/onsi/ginkgo/reporters/stenographer/support/go-isatty
 github.com/onsi/ginkgo/types
-# github.com/onsi/gomega v1.34.1
-## explicit; go 1.20
+# github.com/onsi/gomega v1.34.2
+## explicit; go 1.22
 github.com/onsi/gomega
 github.com/onsi/gomega/format
 github.com/onsi/gomega/gbytes
@@ -144,31 +144,29 @@ github.com/stretchr/testify/require
 # github.com/tedsuo/rata v1.0.1-0.20170830210128-07d200713958
 ## explicit
 github.com/tedsuo/rata
-# github.com/vito/go-sse v1.1.1
+# github.com/vito/go-sse v1.1.2
 ## explicit; go 1.12
 github.com/vito/go-sse/sse
 # github.com/xchapter7x/lo v0.0.0-20160804235750-e33b245fc7a8
 ## explicit
 github.com/xchapter7x/lo
-# golang.org/x/crypto v0.26.0
+# golang.org/x/crypto v0.27.0
 ## explicit; go 1.20
 golang.org/x/crypto/md4
-# golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa
-## explicit; go 1.20
-golang.org/x/exp/constraints
-golang.org/x/exp/slices
-# golang.org/x/mod v0.20.0
-## explicit; go 1.18
+# golang.org/x/exp v0.0.0-20240909161429-701f63a606c0
+## explicit; go 1.22.0
+# golang.org/x/mod v0.21.0
+## explicit; go 1.22.0
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.28.0 => golang.org/x/net v0.28.0
+# golang.org/x/net v0.29.0 => golang.org/x/net v0.29.0
 ## explicit; go 1.18
 golang.org/x/net/context
 golang.org/x/net/html
 golang.org/x/net/html/atom
 golang.org/x/net/html/charset
-# golang.org/x/oauth2 v0.22.0
+# golang.org/x/oauth2 v0.23.0
 ## explicit; go 1.18
 golang.org/x/oauth2
 golang.org/x/oauth2/clientcredentials
@@ -176,11 +174,11 @@ golang.org/x/oauth2/internal
 # golang.org/x/sync v0.8.0
 ## explicit; go 1.18
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.24.0 => golang.org/x/sys v0.24.0
+# golang.org/x/sys v0.25.0 => golang.org/x/sys v0.25.0
 ## explicit; go 1.18
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/text v0.17.0 => golang.org/x/text v0.17.0
+# golang.org/x/text v0.18.0 => golang.org/x/text v0.18.0
 ## explicit; go 1.18
 golang.org/x/text/cases
 golang.org/x/text/encoding
@@ -202,8 +200,8 @@ golang.org/x/text/language
 golang.org/x/text/runes
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
-# golang.org/x/tools v0.24.0 => golang.org/x/tools v0.24.0
-## explicit; go 1.19
+# golang.org/x/tools v0.25.0 => golang.org/x/tools v0.25.0
+## explicit; go 1.22.0
 golang.org/x/tools/go/ast/astutil
 golang.org/x/tools/go/gcexportdata
 golang.org/x/tools/go/packages
@@ -235,7 +233,7 @@ gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3
-# golang.org/x/net => golang.org/x/net v0.28.0
-# golang.org/x/sys => golang.org/x/sys v0.24.0
-# golang.org/x/text => golang.org/x/text v0.17.0
-# golang.org/x/tools => golang.org/x/tools v0.24.0
+# golang.org/x/net => golang.org/x/net v0.29.0
+# golang.org/x/sys => golang.org/x/sys v0.25.0
+# golang.org/x/text => golang.org/x/text v0.18.0
+# golang.org/x/tools => golang.org/x/tools v0.25.0

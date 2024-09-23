@@ -1,31 +1,31 @@
 module github.com/vmwarepivotallabs/cf-mgmt
 
-go 1.22
+go 1.23
 
 replace (
-	golang.org/x/net => golang.org/x/net v0.28.0
-	golang.org/x/sys => golang.org/x/sys v0.24.0
-	golang.org/x/text => golang.org/x/text v0.17.0
-	golang.org/x/tools => golang.org/x/tools v0.24.0
+	golang.org/x/net => golang.org/x/net v0.29.0
+	golang.org/x/sys => golang.org/x/sys v0.25.0
+	golang.org/x/text => golang.org/x/text v0.18.0
+	golang.org/x/tools => golang.org/x/tools v0.25.0
 )
 
 require (
-	code.cloudfoundry.org/routing-api v0.0.0-20240812231547-9f253a3ef041
+	code.cloudfoundry.org/routing-api v0.0.0-20240906112649-2aa4a71d284e
 	github.com/cloudfoundry-community/go-cfclient v0.0.0-20220930021109-9c4e6c59ccf1
 	github.com/cloudfoundry-community/go-cfclient/v3 v3.0.0-alpha.6
 	github.com/cloudfoundry-community/go-uaa v0.3.3
 	github.com/go-ldap/ldap/v3 v3.4.8
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/maxbrunsfeld/counterfeiter/v6 v6.8.1
+	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.34.1
+	github.com/onsi/gomega v1.34.2
 	github.com/pkg/errors v0.9.1
 	github.com/xchapter7x/lo v0.0.0-20160804235750-e33b245fc7a8
 	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.2.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.12.0 // indirect
 	github.com/Azure/go-ntlmssp v0.0.0-20221128193559-754e69321358 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
@@ -47,16 +47,16 @@ require (
 	github.com/smartystreets/goconvey v1.8.1 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/tedsuo/rata v1.0.1-0.20170830210128-07d200713958 // indirect
-	github.com/vito/go-sse v1.1.1 // indirect
-	golang.org/x/crypto v0.26.0 // indirect
-	golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa // indirect
-	golang.org/x/mod v0.20.0 // indirect
-	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/oauth2 v0.22.0 // indirect
+	github.com/vito/go-sse v1.1.2 // indirect
+	golang.org/x/crypto v0.27.0 // indirect
+	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
+	golang.org/x/mod v0.21.0 // indirect
+	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/oauth2 v0.23.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.24.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
+	golang.org/x/tools v0.25.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
