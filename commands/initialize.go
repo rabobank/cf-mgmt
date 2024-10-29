@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	routing_api "code.cloudfoundry.org/routing-api"
 	"github.com/cloudfoundry-community/go-cfclient"
@@ -117,6 +118,7 @@ func InitializePeekManagers(baseCommand BaseCFConfigCommand, peek bool, ldapMgr 
 			ClientSecret:      baseCommand.ClientSecret,
 			UserAgent:         userAgent,
 		}
+
 		cv3, err = v3config.NewClientSecret(fmt.Sprintf("https://api.%s", cfMgmt.SystemDomain),
 			baseCommand.UserID,
 			baseCommand.ClientSecret)
@@ -124,11 +126,13 @@ func InitializePeekManagers(baseCommand BaseCFConfigCommand, peek bool, ldapMgr 
 			return nil, err
 		}
 	}
+
 	client, err := cfclient.NewClient(c)
 	if err != nil {
 		lo.G.Errorf("Error obtaining a New CF Client: %s", err)
 		return nil, err
 	}
+	cv3.WithRequestTimeout(time.Minute)
 	cv3.WithSkipTLSValidation(true)
 	v3client, err := v3cfclient.New(cv3)
 	if err != nil {
