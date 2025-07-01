@@ -2,6 +2,7 @@ package azureAD
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -58,7 +59,7 @@ func (m *Manager) GraphGetGroupMembers(token, groupName string) ([]string, error
 		return nil, err
 	}
 
-	requestURL := GraphURL + "groups/" + groupId + "/members"
+	requestURL := GraphURL + "groups/" + groupId + "/transitiveMembers"
 
 	headers := make(map[string]string)
 	headers["Authorization"] = "Bearer " + token
@@ -106,7 +107,7 @@ func graphGetIdFromName(token, name string) (string, error) {
 
 	if len(result.Value) != 1 {
 		lo.G.Errorf("Number of Id's returned for groupname (%s) search should be exactly one, not %d!", name, result.Value)
-		return "", err
+		return "", fmt.Errorf("Number of Id's returned for groupname (%s) search should be exactly one, not %d!", name, len(result.Value))
 	}
 
 	return result.Value[0].Id, nil
