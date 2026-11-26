@@ -403,22 +403,33 @@ func (m *DefaultManager) SyncInternalUsers(roleUsers *role.RoleUsers, usersInput
 //		}
 //		return nil
 //	}
+func isProtectedUser(user role.RoleUser, cfg *config.GlobalConfig) bool {
+	for _, origin := range cfg.ProtectedUserOrigins {
+		if origin != "" && strings.EqualFold(user.Origin, origin) {
+			return true
+		}
+	}
+	return util.Matches(user.UserName, cfg.ProtectedUsers)
+}
+
 func (m *DefaultManager) RemoveUsers(roleUsers *role.RoleUsers, usersInput UsersInput) error {
 	if usersInput.RemoveUsers {
 		cfg, err := m.Cfg.GetGlobalConfig()
 		if err != nil {
 			return err
 		}
-		protectedUsers := cfg.ProtectedUsers
-
-		if len(roleUsers.Users()) > 0 {
-			m.dumpRoleUsers(fmt.Sprintf("The following users are being removed for %s/%s - Role %s", usersInput.OrgName, usersInput.SpaceName, usersInput.Role), roleUsers.Users())
-		}
+		var usersToRemove []role.RoleUser
 		for _, roleUser := range roleUsers.Users() {
-			if !util.Matches(roleUser.UserName, protectedUsers) {
-				if err := usersInput.RemoveUser(usersInput.EntityName(), usersInput.EntityGUID(), roleUser.UserName, roleUser.GUID); err != nil {
-					return errors.Wrap(err, fmt.Sprintf("error removing user %s", roleUser.UserName))
-				}
+			if !isProtectedUser(roleUser, cfg) {
+				usersToRemove = append(usersToRemove, roleUser)
+			}
+		}
+		if len(usersToRemove) > 0 {
+			m.dumpRoleUsers(fmt.Sprintf("The following users are being removed for %s/%s - Role %s", usersInput.OrgName, usersInput.SpaceName, usersInput.Role), usersToRemove)
+		}
+		for _, roleUser := range usersToRemove {
+			if err := usersInput.RemoveUser(usersInput.EntityName(), usersInput.EntityGUID(), roleUser.UserName, roleUser.GUID); err != nil {
+				return errors.Wrap(err, fmt.Sprintf("error removing user %s", roleUser.UserName))
 			}
 		}
 	} else {

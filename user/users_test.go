@@ -220,6 +220,20 @@ var _ = Describe("given UserSpaces", func() {
 				Expect(roleMgrFake.RemoveSpaceAuditorCallCount()).Should(Equal(0))
 			})
 
+			It("preserves the space role only for the protected origin when usernames match", func() {
+				roleUsers.AddUser(role.RoleUser{UserName: "test", Origin: "RaboSSO", GUID: "sso-id"})
+				fakeReader.GetGlobalConfigReturns(&config.GlobalConfig{ProtectedUserOrigins: []string{"UAA"}}, nil)
+
+				Expect(userManager.RemoveUsers(roleUsers, UsersInput{
+					RemoveUsers: true,
+					SpaceName:   "test-space",
+					RemoveUser:  roleMgrFake.RemoveSpaceDeveloper,
+				})).To(Succeed())
+				Expect(roleMgrFake.RemoveSpaceDeveloperCallCount()).To(Equal(1))
+				_, _, _, guid := roleMgrFake.RemoveSpaceDeveloperArgsForCall(0)
+				Expect(guid).To(Equal("sso-id"))
+			})
+
 			It("Should return error", func() {
 				updateUsersInput := UsersInput{
 					RemoveUsers: true,
@@ -232,6 +246,26 @@ var _ = Describe("given UserSpaces", func() {
 				err := userManager.RemoveUsers(roleUsers, updateUsersInput)
 				Expect(err).Should(HaveOccurred())
 				Expect(roleMgrFake.RemoveSpaceAuditorCallCount()).Should(Equal(1))
+			})
+		})
+
+		Context("CleanupOrgUsers", func() {
+			It("preserves org membership for protected origins even without another role", func() {
+				uaaUsers := &uaa.Users{}
+				uaaUsers.Add(uaa.User{Username: "deployer", Origin: "uaa", GUID: "deployer-id"})
+				uaaUsers.Add(uaa.User{Username: "unused", Origin: "RaboSSO", GUID: "unused-id"})
+				orgUsers, err := role.NewRoleUsers([]*resource.User{{GUID: "deployer-id"}, {GUID: "unused-id"}}, uaaUsers)
+				Expect(err).NotTo(HaveOccurred())
+				uaaFake.ListUsersReturns(uaaUsers, nil)
+				fakeReader.GetOrgConfigsReturns([]config.OrgConfig{{Org: "test-org", RemoveUsers: true}}, nil)
+				fakeReader.GetGlobalConfigReturns(&config.GlobalConfig{ProtectedUserOrigins: []string{"uaa"}}, nil)
+				orgFake.FindOrgReturns(&resource.Organization{Name: "test-org", GUID: "org-id"}, nil)
+				roleMgrFake.ListOrgUsersByRoleReturns(orgUsers, role.InitRoleUsers(), role.InitRoleUsers(), role.InitRoleUsers(), nil)
+
+				Expect(userManager.CleanupOrgUsers()).To(BeEmpty())
+				Expect(roleMgrFake.RemoveOrgUserCallCount()).To(Equal(1))
+				_, _, _, guid := roleMgrFake.RemoveOrgUserArgsForCall(0)
+				Expect(guid).To(Equal("unused-id"))
 			})
 		})
 
