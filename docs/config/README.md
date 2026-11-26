@@ -80,6 +80,11 @@ protected-users:
 - ci_cd_user
 - abcd_123_*
 
+# Keep existing org memberships and org/space roles for these UAA origins.
+# Matches the full origin name, case-insensitively. Configured roles can still be assigned.
+protected-user-origins:
+- uaa # protects all local UAA users, including broker-created service accounts
+
 ```
 
 ### Org Configuration

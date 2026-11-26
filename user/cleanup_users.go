@@ -7,7 +7,6 @@ import (
 	"github.com/vmwarepivotallabs/cf-mgmt/config"
 	"github.com/vmwarepivotallabs/cf-mgmt/role"
 	"github.com/vmwarepivotallabs/cf-mgmt/uaa"
-	"github.com/vmwarepivotallabs/cf-mgmt/util"
 	"github.com/xchapter7x/lo"
 )
 
@@ -78,7 +77,7 @@ func (m *DefaultManager) cleanupOrgUsers(uaaUsers *uaa.Users, input *config.OrgC
 		} else {
 			guid = uaaUser.GUID
 		}
-		if !util.Matches(orgUser.UserName, cfg.ProtectedUsers) {
+		if !isProtectedUser(orgUser, cfg) {
 			if !usersInRoles.HasUserForGUID(orgUser.UserName, guid) {
 				if m.Peek {
 					lo.G.Infof("[dry-run]: Removing User %s from org %s", orgUser.UserName, input.Org)
